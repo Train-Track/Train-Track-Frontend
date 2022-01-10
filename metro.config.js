@@ -5,8 +5,8 @@
  * @format
  */
 const path = require('path');
-// const blacklist = require('metro').createBlacklist;
-const blacklist = require('metro-config/src/defaults/blacklist');
+//const blacklist = require('metro').createBlacklist;
+const blacklist = require('metro-config/src/defaults/exclusionList');
 
 module.exports = {
   transformer: {
@@ -17,16 +17,14 @@ module.exports = {
       },
     }),
   },
-    /**
-     * Add "global" dependencies for our RN project here so that our local components can resolve their
+  /**
+   * Add "global" dependencies for our RN project here so that our local components can resolve their
    * dependencies correctly
    */
   resolver: {
     extraNodeModules: {
-      "react-native-sdk": path.resolve(__dirname, "node_modules/react-native-sdk")
     },
     blacklistRE: blacklist([
-      /node_modules\/.*\/node_modules\/react-native\/.*/,
       /nodejs-assets\/.*/,
       /android\/.*/,
       /ios\/.*/
@@ -38,6 +36,5 @@ module.exports = {
    */
   projectRoot: path.resolve(__dirname),
   watchFolders: [
-    path.resolve(__dirname, "node_modules/react-native-sdk"),
   ]
 };
